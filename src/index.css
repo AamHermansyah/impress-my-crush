@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Mochiy+Pop+One&family=Pacifico&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Pacifico', cursive;
+    @apply overflow-x-hidden;
+  }
+
+  .font-indie {
+    font-family: 'Indie Flower', cursive !important;
+  }
+
+  .font-mochiy {
+    font-family: 'Mochiy Pop One', sans-serif !important;
+  }
+}
