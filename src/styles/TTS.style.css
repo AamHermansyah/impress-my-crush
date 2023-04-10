@@ -1,0 +1,31 @@
+table#TTS {
+  text-align: center;
+  margin: 0px auto;
+}
+
+#TTS td {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  position: relative;
+}
+
+#TTS td[data-label]::before {
+  content: attr(data-label);
+  color: black;
+  position: absolute;
+  top: -5px;
+  left: 5px;
+}
+
+#TTS td input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+#TTS .block {
+  background-color: #000;
+}

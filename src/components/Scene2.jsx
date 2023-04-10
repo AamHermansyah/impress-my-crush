@@ -126,6 +126,16 @@ const Scene2 = () => {
       return;
     }
 
+    if (SCENE2.targetName.split(' ')[0].includes(inputName)) {
+      setBubbleTitle(SCENE2.inputNameFailed.almostRight.firstNameMessage);
+      return;
+    }
+
+    if (SCENE2.targetName.split(' ')[1].includes(inputName)) {
+      setBubbleTitle(SCENE2.inputNameFailed.almostRight.lastNameMessage);
+      return;
+    }
+
     // if inputName contain numbers
     if (/[^a-zA-Z\s]/gi.test(inputName)) {
       setBubbleTitle(SCENE2.inputNameFailed.numberExists);
@@ -232,7 +242,7 @@ const Scene2 = () => {
           className="-mt-10 sm:-mt-8"
         />
       </div>
-      <div className="flex flex-col justify-center items-center max-w-[700px] mx-auto mt-12 sm:mt-0">
+      <div className="absolute inset-0 flex flex-col justify-center items-center max-w-[700px] mx-auto mt-12 sm:mt-0">
         <div className="relative w-full max-w-[300px] self-start">
           <ChatBubble animate={controls}>
             {bubbleTitle}

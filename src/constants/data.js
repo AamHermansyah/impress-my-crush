@@ -23,7 +23,11 @@ export const SCENE2 = {
   inputNameFailed: {
     emptyString: 'Jangan kosong dong😭\nKan hati nda mau aku isi sekarang juga🥰',
     numberExists: 'Nama itu cuma huruf aja ayang🤣\nIhh kamu mah gemoy banget😭❤️',
-    nameHasBeenUsed: 'Itu nama yang tadi loh, kan bukan itu😑'
+    nameHasBeenUsed: 'Itu nama yang tadi loh, kan bukan itu😑',
+    almostRight: {
+      firstNameMessage: 'Aduhh hampir tuh ayo terusin...🥰😘❤️',
+      lastNameMessage: 'Kalo ini nama belakangnya loh😗🤭💕'
+    }
   },
   afterSuccessMessage: `Hhmm... ${ME.toUpperCase()} itu nama aku...\nSemoga selalu ada dihati kamu nda❤️🥰`
 }
