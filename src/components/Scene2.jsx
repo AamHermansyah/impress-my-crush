@@ -22,6 +22,7 @@ const Scene2 = () => {
   const [counter, setCounter] = useState(0);
   const [checkSuccess, setCheckSuccess] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [tempInputName, setTempInputName] = useState([]);
 
   const inputRef = useRef(null);
   const controls = useAnimationControls();
@@ -82,6 +83,7 @@ const Scene2 = () => {
     !isValid && setIsValid(true);
 
     const { value } = e.target;
+
     switch (value.length) {
       case 0:
       case 1:
@@ -107,7 +109,7 @@ const Scene2 = () => {
         break;
     }
 
-    if (SCENE2.targetName.split(' ').includes(e.target.value)) onInputHandsUp.value = true;
+    if (SCENE2.targetName.split(' ').includes(value.toLowerCase())) onInputHandsUp.value = true;
   }
 
   const handleClickButton = (e) => {
@@ -118,8 +120,31 @@ const Scene2 = () => {
       return;
     }
 
+    // if inputName is emptyString
+    if (inputName === '') {
+      setBubbleTitle(SCENE2.inputNameFailed.emptyString);
+      return;
+    }
+
+    // if inputName contain numbers
+    if (/[^a-zA-Z\s]/gi.test(inputName)) {
+      setBubbleTitle(SCENE2.inputNameFailed.numberExists);
+      onInputHandsUp.value = true;
+      setTimeout(() => {
+        onInputHandsUp.value = false;
+      }, 2000);
+      return;
+    }
+
+    // if inputName is same with one of tempInputName
+    const isContainName = tempInputName.some((name) => name === inputName);
+    if (isContainName && inputName !== SCENE2.targetName) {
+      setBubbleTitle(SCENE2.inputNameFailed.nameHasBeenUsed);
+      return;
+    } else setTempInputName([...tempInputName, inputName]);
+
     // failed message
-    if (inputName != 'aam hermansyah' && failedStep < 5) {
+    if (inputName != SCENE2.targetName && failedStep < 5) {
       switch (failedStep) {
         case 1:
           energyChangeCb.value = 60;
@@ -167,7 +192,6 @@ const Scene2 = () => {
           e.target.style.alignSelf = 'flex-end';
           break;
       }
-      return;
     }
 
     // success message
@@ -176,16 +200,26 @@ const Scene2 = () => {
         setBubbleTitle(SCENE2.successStepMessage[1]);
         break;
       case 2:
+        setBubbleTitle(SCENE2.successStepMessage[2]);
         break;
       case 3:
+        setBubbleTitle(SCENE2.successStepMessage[3]);
+        break;
+      case 4:
+        setBubbleTitle(SCENE2.successStepMessage[4]);
         break;
       default:
+        setBubbleTitle(SCENE2.successStepMessage[5]);
         break;
     }
 
     setCheckSuccess(true);
     setCounter(5);
     onInputSuccess.fire();
+
+    setTimeout(() => {
+      setBubbleTitle(SCENE2.afterSuccessMessage);
+    }, 6000);
   }
 
   return (
