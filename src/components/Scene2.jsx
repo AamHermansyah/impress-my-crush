@@ -277,7 +277,7 @@ const Scene2 = () => {
               type="text"
               className="w-full p-3 border rounded-full shadow-sm outline-none text-gray-500 invalid:animate-shake invalid:text-red-500"
               pattern="([a-zA-Z]+|\s)+"
-              placeholder="Masukan nama kamu"
+              placeholder="Masukan nama lengkap nda❤️🥰"
             />
             <button
               type="submit"

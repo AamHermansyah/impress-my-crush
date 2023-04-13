@@ -17,8 +17,8 @@ const Scene1 = () => {
 
   return (
     <m.section
-      initial={{ opacity: 0, x: -100 }}
-      animate={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
       exit={{ opacity: 0 }}
       className="relative min-h-screen bg-[#1D1D1D]"
