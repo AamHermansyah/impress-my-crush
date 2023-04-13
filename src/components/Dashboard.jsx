@@ -84,10 +84,10 @@ function Dashboard() {
             />
             <div className="relative w-max mx-auto">
               <RiveComponent1
-                className={`${hasUnlocked === 3 ? 'right-0' : '-left-[88%]'} absolute -bottom-[70%] w-[200px] aspect-video`}
+                className={`${hasUnlocked === 5 ? 'right-0' : '-left-[88%]'} absolute -bottom-[70%] w-[200px] aspect-video`}
               />
 
-              {hasUnlocked === 3 ? (
+              {hasUnlocked === 5 ? (
                 <button
                   type="button"
                   className={`${isUnlocked ? 'bg-blue-500' : 'bg-yellow-400'} relative block mx-auto px-4 py-2 rounded-full text-white z-10`}
