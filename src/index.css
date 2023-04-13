@@ -17,4 +17,8 @@
   .font-mochiy {
     font-family: 'Mochiy Pop One', sans-serif !important;
   }
+
+  .flip {
+    transform: rotateY(180deg);
+  }
 }

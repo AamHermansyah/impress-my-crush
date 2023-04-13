@@ -5,6 +5,8 @@ import { useAnimationControls } from "framer-motion";
 import { generateRandomNumber } from "../utils/number.utils";
 import HealthBar from "./HealthBar";
 import { SCENE2 } from "../constants/data";
+import { motion as m } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const STATE_MACHINE_NAME = "Login Machine";
 const INPUT_NAME = {
@@ -23,16 +25,24 @@ const Scene2 = () => {
   const [checkSuccess, setCheckSuccess] = useState(false);
   const [progress, setProgress] = useState(0);
   const [tempInputName, setTempInputName] = useState([]);
+  const [modalDisplay, setModalDisplay] = useState(false);
 
   const inputRef = useRef(null);
+  const inputNameRef = useRef(null);
   const controls = useAnimationControls();
   let energyChangeCb;
+
+  const navigate = useNavigate();
 
   const { rive, RiveComponent } = useRive({
     src: 'rive/bear.riv',
     stateMachines: STATE_MACHINE_NAME,
     autoplay: true,
   })
+
+  useEffect(() => {
+    setBubbleTitle('Hai dengan siapa disana? orang sedang aku cari kah hehe🤭❤️')
+  }, []);
 
   useEffect(() => {
     let intervalId;
@@ -67,9 +77,10 @@ const Scene2 = () => {
   }, [bubbleTitle]);
 
   useEffect(() => {
-    const timer =
-      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    return () => clearInterval(timer);
+    if (counter > 0) {
+      const timer = setInterval(() => setCounter(counter - 1), 1000);
+      return () => clearInterval(timer);
+    }
   }, [counter]);
 
   const onInputHandsUp = useStateMachineInput(rive, STATE_MACHINE_NAME, INPUT_NAME.isHandsUp);
@@ -117,6 +128,7 @@ const Scene2 = () => {
 
     // if user can answered with correctly
     if (checkSuccess) {
+      setModalDisplay(true);
       return;
     }
 
@@ -126,12 +138,12 @@ const Scene2 = () => {
       return;
     }
 
-    if (SCENE2.targetName.split(' ')[0].includes(inputName)) {
+    if (SCENE2.targetName.split(' ')[0] === inputName) {
       setBubbleTitle(SCENE2.inputNameFailed.almostRight.firstNameMessage);
       return;
     }
 
-    if (SCENE2.targetName.split(' ')[1].includes(inputName)) {
+    if (SCENE2.targetName.split(' ')[1] === inputName) {
       setBubbleTitle(SCENE2.inputNameFailed.almostRight.lastNameMessage);
       return;
     }
@@ -202,6 +214,7 @@ const Scene2 = () => {
           e.target.style.alignSelf = 'flex-end';
           break;
       }
+      return;
     }
 
     // success message
@@ -232,8 +245,50 @@ const Scene2 = () => {
     }, 6000);
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputNameRef.current.value === '') return;
+    localStorage.setItem("name", inputNameRef.current.value.toLowerCase());
+    navigate('/dashboard');
+    setModalDisplay(false);
+  }
+
   return (
-    <section className="relative w-full h-screen min-h-[500px] bg-[#D6E2EA] p-2 sm:p-10">
+    <m.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      exit={{ opacity: 0 }}
+      className="relative w-full h-screen min-h-[500px] bg-[#D6E2EA] p-2 sm:p-10"
+    >
+      {modalDisplay && (
+        <div className="w-full bg-white absolute inset-0 flex justify-center items-center p-4 z-50">
+          <m.form
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            exit={{ opacity: 0 }}
+            className="w-full max-w-[400px]"
+            onSubmit={handleSubmit}
+          >
+            <input
+              ref={inputNameRef}
+              defaultValue={localStorage.getItem('name') || ''}
+              type="text"
+              className="w-full p-3 border rounded-full shadow-sm outline-none text-gray-500 invalid:animate-shake invalid:text-red-500"
+              pattern="([a-zA-Z]+|\s)+"
+              placeholder="Masukan nama kamu"
+            />
+            <button
+              type="submit"
+              className="block w-max mx-auto px-4 py-2 rounded-full bg-black text-white my-4"
+              onClick={handleSubmit}
+            >
+              Sudah
+            </button>
+          </m.form>
+        </div>
+      )}
       <div className="absolute top-0 right-0 w-[150px] sm:w-[200px] aspect-square">
         <HealthBar
           energyCbFunc={(cb) => {
@@ -270,7 +325,7 @@ const Scene2 = () => {
           </button>
         </div>
       </div>
-    </section>
+    </m.section>
   )
 }
 

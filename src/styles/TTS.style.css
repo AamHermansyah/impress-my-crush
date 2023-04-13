@@ -1,11 +1,11 @@
 table#TTS {
-  text-align: center;
-  margin: 0px auto;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 #TTS td {
-  width: 40px;
-  height: 40px;
+  width: calc(100 / 11 * 1%);
+  aspect-ratio: 1 / 1;
   background-color: white;
   position: relative;
 }
@@ -19,13 +19,18 @@ table#TTS {
 }
 
 #TTS td input {
-  width: 40px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
   text-align: center;
   font-size: 14px;
   text-transform: uppercase;
 }
 
+#TTS td input.disabled {
+  pointer-events: none;
+  background: rgba(136, 255, 152, 0.671);
+}
+
 #TTS .block {
-  background-color: #000;
+  background-color: #62CDFF;
 }

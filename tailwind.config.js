@@ -14,7 +14,8 @@ export default {
         }
       },
       animation: {
-        'shake': 'shake 0.3s forwards'
+        'shake': 'shake 0.3s forwards',
+        'shake-infinity': 'shake 4s forwards infinite'
       }
     },
   },
