@@ -44,7 +44,7 @@ const Scene1 = () => {
           </m.div>
         </div>
       )}
-      <div className="w-full h-full flex py-10 flex-col md:flex-row items-center justify-center">
+      <div className="w-full h-full flex py-10 flex-col md:flex-row items-center justify-center overflow-hidden">
         <RiveComponent className="md:flex-1 w-[250px] sm:w-[200px] aspect-square mx-auto" />
         <div className="relative md:flex-[1.5] p-4 sm:p-10 z-20">
           <h1 className="font-mochiy text-2xl sm:text-4xl text-white md:leading-[65px]">
