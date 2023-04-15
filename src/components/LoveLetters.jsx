@@ -25,7 +25,7 @@ function LoveLetters() {
 
     e.target.setAttribute('target', '_blank');
     e.target.setAttribute('rel', 'noopener norefferer');
-    e.target.href = `https://wa.me/+628316126449?text=${inputRef.current.value}`;
+    e.target.href = `https://wa.me/+6282316126449?text=${inputRef.current.value}`;
     navigate('/dashboard');
   }
 
