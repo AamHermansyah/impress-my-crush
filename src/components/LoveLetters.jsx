@@ -97,7 +97,7 @@ function LoveLetters() {
       )}
       <div className="max-w-[700px] mx-auto p-4">
         <SmoothTypingText stagger={.03} text={LOVE_LETTERS} textStyles="text-md mt-4" />
-        {displayButton && (
+        {!displayButton && (
           <div className="mt-6">
             <button
               onClick={() => {
